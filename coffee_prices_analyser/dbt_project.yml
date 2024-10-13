@@ -3,7 +3,7 @@
 # and underscores. A good package name should reflect your organization's
 # name or the intended use of these models
 name: 'coffee_prices_analyser'
-version: '1.0.0'
+version: '1.0'
 config-version: 2
 
 # This setting configures which "profile" dbt uses for this project.
@@ -13,15 +13,12 @@ profile: 'coffee_prices_analyser'
 # The `model-paths` config, for example, states that models in this project can be
 # found in the "models/" directory. You probably won't need to change these!
 model-paths: ["models"]
-analysis-paths: ["analyses"]
 test-paths: ["tests"]
 seed-paths: ["seeds"]
 macro-paths: ["macros"]
-snapshot-paths: ["snapshots"]
 
 clean-targets:         # directories to be removed by `dbt clean`
   - "target"
-  - "dbt_packages"
 
 
 # Configuring models
@@ -32,6 +29,9 @@ clean-targets:         # directories to be removed by `dbt clean`
 # files using the `{{ config(...) }}` macro.
 models:
   coffee_prices_analyser:
-    # Config indicated by + and applies to all files under models/example/
-    example:
-      +materialized: view
+    staging:
+      +schema: 'stg'  # Prefix for staging tables
+      +materialized: 'table'  # Store staging models as tables
+    marts:
+      +schema: 'refined'  # Prefix for refined tables
+      +materialized: 'table'

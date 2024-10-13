@@ -1,0 +1,18 @@
+
+version: 2
+
+sources:
+  - name: raw
+    tables:
+      - name: coffee_prices
+        description: "Raw data for coffee prices"
+
+models:
+  - name: stg_coffee_prices
+    description: "Cleaned version of raw coffee prices data"
+    columns:
+      - name: date
+        description: "The date of the price observation"
+      - name: value
+        description: "The price of coffee per kg in GBP"
+
